@@ -95,42 +95,60 @@
             console.log('tokens:', tokens);
 
 const jsonData = {
+  "id": 3,
+  "status": "completed",
+  "totalAmount": 111,
+  "tipAmount": 0,
+  "feeAmount": 4,
+  "settleAmount": 107,
+  "requiredAmount": 111,
+  "date": "2023-11-17T13:32:21Z",
+  "snapCode": "w1hRjQUu",
+  "snapCodeReference": "8befd63b-5da6-4bd3-97b2-a6a75617082b",
+  "userReference": "Thomas de Beer",
+  "merchantReference": "1",
+  "statementReference": null,
+  "authCode": "769643",
+  "deliveryAddress": null,
+  "deviceSerialNumber": null,
+  "extra": {
+    "amount": "1111",
     "id": tokens,
-        "status": "completed",
-        "date": "1999-12-31T23:00:00Z",
-        "totalAmount": 1000,
-        "tipAmount": 0,
-        "requiredAmount": 1000,
-        "snapCode": "STB115",
-        "snapCodeReference": "Till Point #1",
-        "userReference": "John Doe",
-        "merchantReference": "INV001",
-        "statementReference": "SNAPSCAN 20150109",
-        "authCode": "123456",
-        "isVoucher": false,
-        "isVoucherRedemption": false,
-        "extra": {
-          "customValue": userID
-        },
-        "deviceSerialNumber": "R28K10HBQTX",
-        "transactionType": "payment"
-      };
+    "customValue": userID,
+    "merchantId": "82C252D3-2105-4D80-9716-1842EED711EA",
+    "transactionType": "Payment",
+    "checksum": "9CF99A90203B7F9180C5A2D95D9173455FF3F4F69469C21A4FB180BB144ADB9A",
+    "strict": false,
+    "redirectUrl": "",
+    "successRedirectUrl": "",
+    "failRedirectUrl": "",
+    "wegotOrderId": null,
+    "plugin": "",
+    "plugin_version": ""
+  },
+  "isVoucher": null,
+  "isVoucherRedemption": false,
+  "paymentType": "gateway",
+  "transactionType": "payment"
+}
+        const urlEncodedData = new URLSearchParams();
+        urlEncodedData.append('payload', JSON.stringify(jsonData));
 
-            fetch('https://frame-archive.online/snapscan_webhook', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        fetch('https://frame-archive.online/snapscan_webhook', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlEncodedData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
     </script>
 </body>
 </html>
